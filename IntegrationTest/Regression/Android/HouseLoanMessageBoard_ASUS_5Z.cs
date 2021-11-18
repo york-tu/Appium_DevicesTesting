@@ -4,9 +4,9 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using Xunit;
 
-namespace Xunit_Appium_DevicesTesting_1109
+namespace MobileAutoTest.IntegrationTest.Regression.Android
 {
-    public class XUnit_Appium_DeviceTesting_Samsung
+    public class ReallDevice_LoanMessageBoardSendData_ASUS
     {
         [Fact]
         [Obsolete]
@@ -15,8 +15,8 @@ namespace Xunit_Appium_DevicesTesting_1109
             // Set the desired capabilities.
             DesiredCapabilities dc = new DesiredCapabilities();
             dc.SetCapability("platformName", "Android");
-            dc.SetCapability("platformVersion", "6.0.1");
-            dc.SetCapability("deviceName", "SAMSUNG_S6_Edge");
+            dc.SetCapability("platformVersion", "9");
+            dc.SetCapability("deviceName", "ASUS_Z01RD");
             dc.SetCapability("browserName", "Chrome");
             dc.SetCapability("noReset", true);
             dc.SetCapability("automationName", "UIAutomator2");
@@ -28,7 +28,7 @@ namespace Xunit_Appium_DevicesTesting_1109
 
             IWebDriver _driver = new RemoteWebDriver(new Uri("http://127.0.0.1:4723/wd/hub"), dc, TimeSpan.FromMinutes(5))
             {
-                Url = "https://www.esunbank.com.tw/bank/personal/loan/tools/apply/house-loan?dev=mobile" // 0. Browse 房貸留言版M版
+                Url = "https://wwwsit.testesunbank.com.tw/bank/personal/loan/tools/apply/house-loan?dev=mobile" // 0. Browse 房貸留言版M版
             };
 
             _driver.FindElement(By.XPath("//*[contains(@name, 'loanAmount')]")).SendKeys("50"); // 1. 額度
@@ -80,7 +80,7 @@ namespace Xunit_Appium_DevicesTesting_1109
 
             _driver.FindElement(By.XPath("//*[contains(@name, 'addrline')]")).SendKeys("中山路一路2段3巷4弄5號"); // 10. 詳細地址
 
-            fingerAction.SendKeys(Keys.PageDown).Build().Perform(); // scroll down page
+           // fingerAction.SendKeys(Keys.PageDown).Build().Perform(); // scroll down page
 
             _driver.FindElement(By.XPath("//*[contains(@name, 'locCity')]")).Click(); // 11. 房屋位置-縣市-下拉選單
             var ranLocCity = ran.Next(1, 23); // random 縣市選單選項範圍
@@ -108,7 +108,7 @@ namespace Xunit_Appium_DevicesTesting_1109
                 fingerAction.SendKeys(Keys.ArrowDown);
             }
 
-            _driver.FindElement(By.ClassName("last-child")).Click(); // 13. 點服務據點-靠近申貸房屋位置
+            //_driver.FindElement(By.ClassName("last-child")).Click(); // 13. 點服務據點-靠近申貸房屋位置
 
 
             _driver.FindElement(By.XPath("//*[contains(@name, 'contactTime')]")).Click(); // 14. 方便聯絡時間下拉選單
@@ -125,7 +125,7 @@ namespace Xunit_Appium_DevicesTesting_1109
 
             _driver.FindElement(By.ClassName("trans-element-checkbox")).Click(); // 15. 我已閱讀並同意
 
-            //_driver.FindElement(By.Id("submit")).Click(); // 16. 送出
+            _driver.FindElement(By.Id("submit")).Click(); // 16. 送出
 
             // Close the browser.
             _driver.Quit();
